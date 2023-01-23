@@ -43,7 +43,7 @@ align-items: center;
 justify-content: space-between;
 background-color: ${(props) => props.active ? props.theme.bgSubDiv : props.theme.bgDiv};
 height: 100%;
-font-family: 'IBM Plex Mono';
+font-family: 'Roboto';
 margin: 7px;
 border-radius: 10px;
 padding: 0 5px 0 5px;
@@ -51,5 +51,6 @@ cursor: pointer;
 text-transform: uppercase;
 font-weight: bold;
 font-size: small;
+font-color: white;
 `
 export default HeaderNav
