@@ -22,8 +22,15 @@ const FormRightWrapper = () => {
       {/* image */}
       <FormInput>
         <label>selct image</label>
-        <Image type={'file'} accept='image/*'></Image>
+        <Image type={'file'} accept='image/*'>
+        </Image>
       </FormInput>
+      <Button>
+        Upload Files To IPFS
+      </Button>
+      <Button>
+        Start Campaign
+      </Button>
     </FormRight>
   )
 }
@@ -81,7 +88,40 @@ font-size:large;
 width:100% ;
 `
 
-const Image = styled.div`
+const Image = styled.input`
+background-color:${(props) => props.theme.bgDiv} ;
+  color:${(props) => props.theme.color} ;
+  margin-top:4px;
+  border:none ;
+  border-radius:8px ;
+  outline:none;
+  font-size:large;
+  width:100% ;
 
+
+  &::-webkit-file-upload-button {
+    padding: 15px ;
+    background-color: ${(props) => props.theme.bgSubDiv} ;
+    color: ${(props) => props.theme.color} ;
+    outline:none ;
+    border:none ;
+    font-weight:bold ;
+  }  
+`
+
+const Button = styled.button`
+display: flex;
+justify-content:center;
+width:100% ;
+padding:15px ;
+color:white ;
+background-color:#00b712 ;
+background-image:
+    linear-gradient(180deg, #00b712 0%, #5aff15 80%) ;
+border:none;
+margin-top:30px ;
+cursor: pointer;
+font-weight:bold ;
+font-size:large ;
 `
 export default FormRightWrapper
