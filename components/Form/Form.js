@@ -1,20 +1,41 @@
 import styled from "styled-components"
 import FormLeftWrapper from "./Components/FormLeftWrapper"
 import FormRightWrapper from "./Components/FormRightWrapper"
-const Form = () => {
-    return (
-        <FormWrapper>
-            <FormMain>
-                {/*  <FormTitle>
-                    Create Campaign
-    </FormTitle> */}
-                <FormInputsWrapper>
-                    <FormLeftWrapper />
-                    <FormRightWrapper />
-                </FormInputsWrapper>
-            </FormMain>
+import { createContext, useState } from "react"
 
-        </FormWrapper>
+
+const FormState = createContext();
+const Form = () => {
+    const [form, setForm] = useState({
+        campaignTitle: "",
+        story: "",
+        requiredAmount: "",
+        category: "",
+    });
+
+    const FormHandler = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const [image, setImage] = useState(null);
+    const ImageHandler = (e) => {
+        setImage(e.target.files[0]);
+    }
+    return (
+        <FormState.Provider value={{ form, setForm, image, setImage, ImageHandler, FormHandler }}>
+            <FormWrapper>
+                <FormMain>
+                    <FormInputsWrapper>
+                        <FormLeftWrapper />
+                        <FormRightWrapper />
+                    </FormInputsWrapper>
+                </FormMain>
+
+            </FormWrapper>
+        </FormState.Provider>
     )
 }
 
@@ -50,3 +71,4 @@ justify-content: space-between;
 margin-top: 45px;
 `
 export default Form
+export { FormState };
