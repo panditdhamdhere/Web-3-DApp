@@ -10,7 +10,7 @@ const Form = () => {
         campaignTitle: "",
         story: "",
         requiredAmount: "",
-        category: "",
+        category: "education",
     });
 
     const FormHandler = (e) => {

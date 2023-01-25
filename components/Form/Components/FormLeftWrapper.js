@@ -16,7 +16,7 @@ const Handler = useContext(FormState);
 
       <FormInput>
         <label>Story</label>
-        <TextArea placeholder="Describe your Story Here">
+        <TextArea onChange={Handler.FormHandler} value={Handler.form.story} name="story" placeholder="Describe your Story Here">
         </TextArea>
       </FormInput>
     </FormLeft >
