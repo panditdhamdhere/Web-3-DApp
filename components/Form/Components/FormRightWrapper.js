@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { FormState } from '../Form';
 import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-import { TailSpin } from 'react-loader-spinner'
-import { create as IPFSHTTPClient } from 'ipfs-http-client';
+import {TailSpin} from 'react-loader-spinner'
+import {create as IPFSHTTPClient} from 'ipfs-http-client';
 
-const projectId = '60651117dee4be67238b'
-const projectSecret = 'e6ef95d36428180dc4307105f5f5da0c69af19de295f2999a399138d415a3cfc'
+const projectId = process.env.NEXT_PUBLIC_IPFS_ID
+const projectSecret = process.env.NEXT_PUBLIC_IPFS_KEY
 const auth = 'Basic ' + Buffer.from(projectId + ":" + projectSecret).toString('base64')
 
 const client = IPFSHTTPClient({
-  host: 'ipfs.infura.io',
-  port: 5001,
+  host:'ipfs.infura.io',
+  port:5001,
   protocol: 'https',
   headers: {
     authorization: auth
@@ -28,7 +28,7 @@ const FormRightWrapper = () => {
     e.preventDefault();
     setUploadLoading(true);
 
-    if (Handler.form.story !== "") {
+    if(Handler.form.story !== "") {
       try {
         const added = await client.add(Handler.form.story);
         Handler.setStoryUrl(added.path)
@@ -38,20 +38,20 @@ const FormRightWrapper = () => {
     }
 
 
-    if (Handler.image !== null) {
-      try {
-        const added = await client.add(Handler.image);
-        Handler.setImageUrl(added.path)
-      } catch (error) {
-        toast.warn(`Error Uploading Image`);
+      if(Handler.image !== null) {
+          try {
+              const added = await client.add(Handler.image);
+              Handler.setImageUrl(added.path)
+          } catch (error) {
+            toast.warn(`Error Uploading Image`);
+          }
       }
-    }
 
-    setUploadLoading(false);
-    setUploaded(true);
-    Handler.setUploaded(true);
-    toast.success("Files Uploaded Sucessfully")
-  }
+      setUploadLoading(false);
+      setUploaded(true);
+      Handler.setUploaded(true);
+      toast.success("Files Uploaded Sucessfully")
+}
 
   return (
     <FormRight>
@@ -78,11 +78,11 @@ const FormRightWrapper = () => {
         </Image>
       </FormInput>
       {uploadLoading == true ? <Button><TailSpin color='#fff' height={20} /></Button> :
-        uploaded == false ?
-          <Button onClick={uploadFiles}>
-            Upload Files to IPFS
-          </Button>
-          : <Button style={{ cursor: "no-drop" }}>Files uploaded Sucessfully</Button>
+        uploaded == false ? 
+        <Button onClick={uploadFiles}>
+          Upload Files to IPFS
+        </Button>
+        : <Button style={{cursor: "no-drop"}}>Files uploaded Sucessfully</Button>
       }
       <Button onClick={Handler.startCampaign}>
         Start Campaign
@@ -118,7 +118,7 @@ const Input = styled.input`
   outline:none;
   font-size:large;
   width:100% ;
-`
+` 
 
 const RowFirstInput = styled.div`
   display:flex ;
